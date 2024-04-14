@@ -14,23 +14,18 @@ class DatabaseConnectorModel:
         self.host = os.environ.get('DB_HOST')
         self.port = os.environ.get('DB_PORT')
         
-        self.connect(self)
-        self.disconnect(self)
-
-    def get_connection():
-        dsn = os.environ.get('DATABASE_URL')
-        return psycopg2.connect(dsn)
+        self.connect()
+        self.disconnect()
 
     def connect(self):
         try:
-            # self.connection = psycopg2.connect(
-            #     dbname=self.dbname,
-            #     user=self.user,
-            #     password=self.password,
-            #     host=self.host,
-            #     port=self.port
-            # )
-            self.connection = self.get_connection()
+            self.connection = psycopg2.connect(
+                dbname=self.dbname,
+                user=self.user,
+                password=self.password,
+                host=self.host,
+                port=self.port
+            )
             self.cursor = self.connection.cursor()
             print("Connected to PostgreSQL!")
         except psycopg2.Error as e:

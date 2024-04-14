@@ -1,8 +1,8 @@
 import tkinter as tk
-import subprocess
+from dotenv import load_dotenv
 
-# setup_env.shを実行して環境変数を設定
-subprocess.call("setup_env.sh", shell=True)
+# .envファイルの内容を読み込見込む
+load_dotenv()
 
 from controllers.TestController import TestController
 
