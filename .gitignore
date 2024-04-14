@@ -4,3 +4,4 @@ build
 *.spec
 
 setup_env.sh
+.env

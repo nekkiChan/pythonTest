@@ -1,5 +1,15 @@
 # メモ
 
+## 環境変数設定について
+
+以下のコマンドを実施し、.envファイルを生成
+
+``
+pip install python-dotenv
+``
+
+[参考](https://zenn.dev/nakashi94/articles/9c93b6a58acdb4)
+
 ## exe化にあたって
 
 以下のコマンドを実施
