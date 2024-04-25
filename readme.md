@@ -15,6 +15,12 @@ pip install python-dotenv
 以下のコマンドを実施
 
 ``
+git clone https://github.com/pyinstaller/pyinstaller.git
+cd pyinstaller/bootloader
+python ./waf distclean all
+pip install wheel
+cd pyinstaller
+pip install .
 pyinstaller main.py --onefile --noconsole
 ``
 

@@ -3,5 +3,7 @@ build
 *.pyc
 *.spec
 
+pyinstaller
+
 setup_env.sh
 .env
