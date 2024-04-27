@@ -33,3 +33,6 @@ pip install psycopg2
 ``
 
 [参考](https://asameshicode.com/python-psycopg2/)
+
+[ここ](https://www.enterprisedb.com/download-postgresql-binaries)からダウンロード用ZIPをインストール
+

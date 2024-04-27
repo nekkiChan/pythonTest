@@ -1,15 +1,20 @@
 # view/test_view.py
 
 import tkinter as tk
+import os
 
 class TestView:
     def __init__(self, root, controller):
         self.root = root
         self.controller = controller
-        self.root.title("Tkinter Test App")
+        self.model = self.controller.model
+        self.image_asset_path = os.path.join(self.model.find_directory('views'), 'image\\asset\\')
+        self.root.title(os.environ.get("TITLE"))
 
         # ウィンドウの初期サイズを設定
         self.root.geometry("400x300")
+        
+        self.root.iconbitmap(self.image_asset_path + 'icon.ico')
 
         self.label = tk.Label(root, text="Enter your name:")
         self.label.pack(pady=10)

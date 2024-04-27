@@ -8,7 +8,20 @@ class TestModel:
         self.name = ""
         self.data_path = os.path.join(os.path.dirname(__file__), 'data', 'data.json')
         self.load_data()
-
+        
+    def find_directory(self, dir_name):
+        # 指定されたディレクトリまたはその親ディレクトリにbuildディレクトリがあるか確認
+        current_dir = os.getcwd()
+        while current_dir:
+            dir = os.path.join(current_dir, dir_name)
+            if os.path.isdir(dir):
+                return dir
+            # 親ディレクトリに移動
+            current_dir = os.path.dirname(current_dir)
+        
+        # ルートディレクトリまで探索しても見つからない場合はNoneを返す
+        return current_dir
+    
     def set_name(self, name):
         self.name = name
         self.save_data()

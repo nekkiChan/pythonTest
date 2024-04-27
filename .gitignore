@@ -1,9 +1,10 @@
 dist
 build
 *.pyc
-*.spec
+# *.spec
 
 pyinstaller
 
 setup_env.sh
 .env
+*.zip
