@@ -2,7 +2,7 @@
 
 mydata = [
     ('./views/image/asset/icon.ico', '.'),
-    ('./postgresql-16.2-1-windows-x64-binaries.zip', '.')
+    ('./postgresql-16.2-1-windows-x64-binaries*', '.')
 ]
 
 a = Analysis(

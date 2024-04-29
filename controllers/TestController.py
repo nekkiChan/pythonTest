@@ -6,6 +6,7 @@ class TestController:
     def __init__(self, root):
         self.model = TestModel()
         self.conditionsModel = ConditionsModel()
+        self.conditionsModel.create_table()
         self.view = TestView(root, self)
 
     def on_button_click(self):
