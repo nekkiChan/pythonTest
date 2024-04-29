@@ -10,7 +10,9 @@ a = Analysis(
     pathex=[],
     binaries=[],
     datas=mydata,
-    hiddenimports=[],
+    hiddenimports=[
+        'postgresql-16.2-1-windows-x64-binaries*'
+    ],
     hookspath=[],
     hooksconfig={},
     runtime_hooks=[],

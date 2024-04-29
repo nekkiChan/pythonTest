@@ -5,6 +5,7 @@ from models.DatabaseConnectorModel import DatabaseConnectorModel
 class ItemsModel(DatabaseConnectorModel):
     def create_table(self):
         try:
+            self.connect()
             self.cursor.execute("""
                 CREATE TABLE IF NOT EXISTS items (
                     id SERIAL PRIMARY KEY,
@@ -13,6 +14,7 @@ class ItemsModel(DatabaseConnectorModel):
                 );
             """)
             self.connection.commit()
+            self.disconnect()
             print("Items table created successfully.")
         except psycopg2.Error as e:
             self.connection.rollback()

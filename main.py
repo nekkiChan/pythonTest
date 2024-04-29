@@ -1,12 +1,11 @@
 import tkinter as tk
 from dotenv import load_dotenv
 
-
 # .envファイルの内容を読み込見込む
 load_dotenv()
 
-import DatabaseConnector
-DatabaseConnector.init_database()
+# import DatabaseConnector
+# DatabaseConnector.init_database()
 
 
 from controllers.TestController import TestController

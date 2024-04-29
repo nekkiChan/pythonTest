@@ -4,6 +4,7 @@ build
 # *.spec
 
 pyinstaller
+postgresql-16.2-1-windows-x64-binaries
 
 setup_env.sh
 .env

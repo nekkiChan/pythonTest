@@ -15,6 +15,11 @@ class DatabaseConnectorModel:
         self.port = os.environ.get('DB_PORT')
         
         self.connect()
+
+        # データベースが存在しない場合にのみ作成する
+        # if not self.check_database_exists():
+        # self.create_database()
+
         self.disconnect()
 
     def connect(self):
@@ -31,11 +36,36 @@ class DatabaseConnectorModel:
         except psycopg2.Error as e:
             print("Unable to connect to the database:", e)
 
+
     def disconnect(self):
         if self.connection:
             self.cursor.close()
             self.connection.close()
             print("Disconnected from PostgreSQL.")
+
+    def check_database_exists(self):
+        try:
+            # データベースの存在を確認するクエリ
+            self.cursor.execute("SELECT 1 FROM pg_database WHERE datname = %s;", (self.dbname,))
+            result = self.cursor.fetchone()
+            return bool(result)
+        except psycopg2.Error as e:
+            print("Error checking database existence:", e)
+            return False
+
+    def create_database(self):
+        try:
+            # データベース作成のクエリを定義
+            create_db_query = f"CREATE DATABASE {self.dbname};"
+
+            # クエリを実行
+            self.cursor.execute(create_db_query)
+            self.connection.commit()
+
+            print("Database created successfully.")
+        except psycopg2.Error as e:
+            self.connection.rollback()
+            print("Error creating database:", e)
 
     def load_data_from_db(self):
         try:

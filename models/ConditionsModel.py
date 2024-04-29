@@ -5,6 +5,7 @@ from models.DatabaseConnectorModel import DatabaseConnectorModel
 class ConditionsModel(DatabaseConnectorModel):
     def create_table(self):
         try:
+            self.connect()
             self.cursor.execute("""
                 CREATE TABLE IF NOT EXISTS conditions (
                     id SERIAL PRIMARY KEY,
@@ -16,6 +17,7 @@ class ConditionsModel(DatabaseConnectorModel):
                 );
             """)
             self.connection.commit()
+            self.disconnect()
             print("Conditions table created successfully.")
         except psycopg2.Error as e:
             self.connection.rollback()
