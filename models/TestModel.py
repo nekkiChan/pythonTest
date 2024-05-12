@@ -2,13 +2,37 @@
 
 import json
 import os
+import re
+import pprint
 
 class TestModel:
     def __init__(self):
         self.name = ""
         self.data_path = os.path.join(os.path.dirname(__file__), 'data', 'data.json')
         self.load_data()
+        self.find_code()
         
+    def find_code(self):
+        
+        prescription_text = """
+                            31,1112
+                            51,20231028
+                            101,1,1,,3
+                            111,1,1,,１日４回、毎食後・就寝前服用,4
+                            201,1,1,1,2,620160301,,4,1,g
+                            101,2,2,,10
+                            111,2,1,,発熱時服用,
+                            201,2,1,1,7,1149019F1ZZZ,【般】ロキソプロフェンＮａ錠６０ｍｇ,1,1,T
+                            101,3,1,,10
+                            111,3,1,,１日３回、毎食後服用,3
+                            201,3,1,1,7,2316020F1ZZZ,【般】ビフィズス菌錠１２ｍｇ,3,1,T
+                            """
+        
+        pattern = re.compile(r"201,\d+,\d+,\d+,\d+,(.*?),")
+        pprint.pprint(pattern.findall(prescription_text))        
+        pattern = re.compile(r"201,\d+,\d+,\d+,\d+,(\d{9}|\w{12}),(.*?)\n")
+        pprint.pprint(pattern.findall(prescription_text))
+                        
     def find_directory(self, dir_name):
         # 指定されたディレクトリまたはその親ディレクトリにbuildディレクトリがあるか確認
         current_dir = os.getcwd()
