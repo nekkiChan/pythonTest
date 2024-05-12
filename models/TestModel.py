@@ -27,11 +27,16 @@ class TestModel:
                             111,3,1,,１日３回、毎食後服用,3
                             201,3,1,1,7,2316020F1ZZZ,【般】ビフィズス菌錠１２ｍｇ,3,1,T
                             """
-        
-        pattern = re.compile(r"201,\d+,\d+,\d+,\d+,(.*?),")
+        top_id = 201
+        pattern = re.compile(r"{},\d+,\d+,\d+,\d+,(.*?),".format(top_id))
         pprint.pprint(pattern.findall(prescription_text))        
-        pattern = re.compile(r"201,\d+,\d+,\d+,\d+,(\d{9}|\w{12}),(.*?)\n")
-        pprint.pprint(pattern.findall(prescription_text))
+        pattern = re.compile(r"201,(.*?)\n")
+        tags = pattern.findall(prescription_text)
+        for tag in tags:
+            print(tag)
+            tag = re.split(',', tag)
+            del tag[0:6:1]
+            pprint.pprint(tag)
                         
     def find_directory(self, dir_name):
         # 指定されたディレクトリまたはその親ディレクトリにbuildディレクトリがあるか確認
