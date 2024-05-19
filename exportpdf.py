@@ -1,7 +1,7 @@
 import os
-
+import tkinter as tk
+from tkinter import filedialog, messagebox
 from dbconnector import fetch_data
-
 from reportlab.lib.pagesizes import A4
 from reportlab.lib import colors
 from reportlab.platypus import SimpleDocTemplate, Table, TableStyle, Paragraph, Spacer
@@ -9,8 +9,7 @@ from reportlab.lib.styles import getSampleStyleSheet, ParagraphStyle
 from reportlab.pdfbase.ttfonts import TTFont
 from reportlab.pdfbase import pdfmetrics
 
-def create_pdf(data):
-    pdf_file = "output_with_header_jp.pdf"
+def create_pdf(data, pdf_file):
     document = SimpleDocTemplate(pdf_file, pagesize=A4)
 
     # フォントのディレクトリ指定
@@ -76,6 +75,30 @@ def create_pdf(data):
     elements = [title, spacer, table]
     document.build(elements)
 
-if __name__ == "__main__":
+def save_pdf():
     data = fetch_data()
-    create_pdf(data)
+    save_path = filedialog.asksaveasfilename(defaultextension=".pdf", filetypes=[("PDF files", "*.pdf")])
+    if save_path:
+        try:
+            create_pdf(data, save_path)
+            messagebox.showinfo("完了", "PDFファイルが正常に保存されました")
+        except Exception as e:
+            messagebox.showerror("エラー", f"PDFファイルの生成中にエラーが発生しました: {str(e)}")
+
+def main():
+    root = tk.Tk()
+    root.title("PDF生成アプリケーション")
+
+    frame = tk.Frame(root, padx=10, pady=10)
+    frame.pack(padx=10, pady=10)
+
+    label = tk.Label(frame, text="PDFを生成して保存するには、以下のボタンをクリックしてください。")
+    label.pack(pady=5)
+
+    button = tk.Button(frame, text="PDFを生成", command=save_pdf)
+    button.pack(pady=10)
+
+    root.mainloop()
+
+if __name__ == "__main__":
+    main()
