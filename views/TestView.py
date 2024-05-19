@@ -8,13 +8,8 @@ class TestView:
         self.root = root
         self.controller = controller
         self.model = self.controller.model
-        self.image_asset_path = os.path.join(self.model.find_directory('views'), 'image\\asset\\')
+        self.image_asset_path = os.path.join(os.path.dirname(__file__), 'image','asset')
         self.root.title(os.environ.get("TITLE"))
-
-        # ウィンドウの初期サイズを設定
-        self.root.geometry("400x300")
-        
-        self.root.iconbitmap(self.image_asset_path + 'icon.ico')
 
         self.label = tk.Label(root, text="Enter your name:")
         self.label.pack(pady=10)

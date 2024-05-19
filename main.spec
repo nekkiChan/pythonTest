@@ -1,7 +1,7 @@
 # -*- mode: python ; coding: utf-8 -*-
 
 mydata = [
-    ('./views/image/asset/icon.ico', '.'),
+    ('./image/*', 'image'),
 ]
 
 a = Analysis(
