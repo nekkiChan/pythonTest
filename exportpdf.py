@@ -44,6 +44,8 @@ def create_pdf(data, pdf_file):
 
     title = Paragraph("テーブルタイトル", title_style)
     spacer = Spacer(1, 12)  # スペーサーを追加
+    
+    subtitle = Paragraph("テーブル2", title_style)
 
     # データのヘッダー（日本語）
     headers = ["id", "名前", "性別", "年齢"]
@@ -72,7 +74,7 @@ def create_pdf(data, pdf_file):
     table.setStyle(style)
 
     # 要素のリストを作成
-    elements = [title, spacer, table]
+    elements = [title, spacer, subtitle, spacer, table]
     document.build(elements)
 
 def save_pdf():
